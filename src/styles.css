@@ -1,0 +1,11 @@
+/* styles.css or App.css or equivalent */
+html,
+body,
+#root, /* This is the default root div created by Create React App. Adjust if your app's entry div has a different id. */
+.canvas-container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
