@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Mesh, Vector3 } from "three";
+import { Mesh, Vector3, PerspectiveCamera } from "three";
 
 const speed = 0.15; // Adjust this for changing speed. A higher value will result in faster movement.
 const lerpFactor = 0.2; // Adjust this for smoothness of movement. A value closer to 1 will make it less smooth but faster.
