@@ -1,9 +1,9 @@
-// Tile.tsx
-import React, { useRef } from "react";
-import { MeshBasicMaterial } from "three";
+import React from "react";
+import { Text } from "@react-three/drei";
+import { MeshBasicMaterial } from 'three';
 
 interface TileProps {
-    position: { x: number, z: number },
+    position: { x: number, y: number, z: number },
     tileMaterialProps: any,
     lightOrbProps: any,
     registerOrb: (mesh: THREE.Mesh | null, idx: number) => void,
@@ -24,8 +24,14 @@ const Tile: React.FC<TileProps> = ({ position, tileMaterialProps, lightOrbProps,
                 <sphereBufferGeometry attach="geometry" args={[0.5, 32, 32]} />
                 <meshBasicMaterial {...lightOrbProps} />
             </mesh>
+            <Text
+                position={[position.x, position.y + 1, position.z]}
+                fontSize={1}
+                color="black"
+            >
+            </Text>
         </React.Fragment>
     );
-}
+};
 
 export default Tile;
