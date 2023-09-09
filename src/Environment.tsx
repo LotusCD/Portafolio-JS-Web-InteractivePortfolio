@@ -1,10 +1,15 @@
-import React, { useRef } from "react";
+
+import React, { useState, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { MeshBasicMaterial } from 'three';
+import { Html, Text } from "@react-three/drei";
+import { Vector3 } from 'three';
 
 
-const Environment: React.FC = () => {
+
+const Environment: React.FC<{ playerPosition: Vector3 }> = ({ playerPosition }) => {
   const groundSize = 50;
+
 
   const tileMaterialProps = {
     color: "rgba(127, 255, 212, 0.7)",
@@ -13,32 +18,54 @@ const Environment: React.FC = () => {
   };
 
   const lightOrbProps = {
-    color: "rgba(127, 255, 212, 1)", // Starts fully opaque
+    color: "rgba(127, 255, 212, 1)",
     transparent: true
   };
 
   const lightOrbs = useRef<(THREE.Mesh | null)[]>([]);
 
+  // State Management for Modal
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [activatedTilePosition, setActivatedTilePosition] = useState<Vector3 | null>(null);
 
+
+  // Mocked player's position for the example
+  
+
+  const checkPlayerOnTile = () => {
+    const threshold = 0.5;
+    const tiles = [{ x: 2, z: 3 }, { x: -3, z: -4 }];
+
+    let activatedTile: Vector3 | null = null;
+
+    for (let tilePos of tiles) {
+      if (
+        Math.abs(tilePos.x - playerPosition.x) <= threshold &&
+        Math.abs(tilePos.z - playerPosition.z) <= threshold
+      ) {
+        activatedTile = new Vector3(tilePos.x, 1, tilePos.z);  // Convert to Vector3
+        break;
+      }
+    }
+
+    setModalVisible(!!activatedTile);
+    setActivatedTilePosition(activatedTile);
+};
   
 
   useFrame(({ clock }) => {
     lightOrbs.current.forEach((orb) => {
       if (orb && orb.material instanceof MeshBasicMaterial) {
         const elapsedTime = clock.getElapsedTime();
-  
-        // Move the orb upwards with a shortened trajectory
+
         orb.position.y = 0.8 + Math.sin(elapsedTime * 0.5) * 1.5;
 
-  
-        // Hide the orb when moving downwards
         if (Math.cos(elapsedTime) < 0) {
           orb.material.opacity = 0;
         } else {
           orb.material.opacity = Math.max(0, 1 - Math.sin(elapsedTime));
         }
-  
-        // Reset the orb's position and opacity when it disappears at the peak
+
         if (orb.material.opacity === 0 && Math.sin(elapsedTime) >= 0) {
           orb.position.y = 0.5;
           orb.material.opacity = 1;
@@ -46,25 +73,23 @@ const Environment: React.FC = () => {
         }
       }
     });
+
+    checkPlayerOnTile();
   });
-  
+
   return (
     <>
-      {/* Ground Plane */}
       <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeBufferGeometry attach="geometry" args={[groundSize, groundSize]} />
         <meshStandardMaterial attach="material" color="green" />
       </mesh>
 
-      {/* Tiles with light orbs */}
       {[{ x: 2, z: 3 }, { x: -3, z: -4 }].map((pos, idx) => (
         <React.Fragment key={idx}>
-          {/* Tile */}
           <mesh position={[pos.x, -0.5, pos.z]}>
             <boxGeometry args={[1, 0, 1]} />
             <meshStandardMaterial {...tileMaterialProps} />
           </mesh>
-          {/* Light Orb */}
           <mesh 
             ref={(mesh) => { 
                 if (mesh) {
@@ -78,6 +103,16 @@ const Environment: React.FC = () => {
           </mesh>
         </React.Fragment>
       ))}
+
+      {isModalVisible && activatedTilePosition && (
+              <Text
+                position={[activatedTilePosition.x, 1, activatedTilePosition.z]}  // Positioning the text 1 unit above the tile
+                fontSize={1}  // Adjust as needed
+                color="black"  // Adjust as needed
+              >
+                Player is on a tile!
+              </Text>
+            )}
     </>
   );
 };

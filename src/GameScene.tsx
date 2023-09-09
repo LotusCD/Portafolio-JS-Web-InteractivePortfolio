@@ -9,6 +9,7 @@ const GameScene: React.FC = () => {
     new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
   );
   const [camera, setCamera] = useState<PerspectiveCamera>();
+  const [playerPosition, setPlayerPosition] = useState(new Vector3(0, 0, 0));
 
   useEffect(() => {
     setCamera(cameraRef.current);
@@ -20,8 +21,8 @@ const GameScene: React.FC = () => {
     <Canvas camera={camera}>
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} />
-      <Player cameraRef={cameraRef} />
-      <Environment />
+      <Player cameraRef={cameraRef} onPositionUpdate={(pos) => setPlayerPosition(pos)} />
+      <Environment playerPosition={playerPosition} />
     </Canvas>
   );
 };

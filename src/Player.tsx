@@ -5,8 +5,9 @@ import { Mesh, Vector3, PerspectiveCamera } from "three";
 const speed = 0.15; // Adjust this for changing speed. A higher value will result in faster movement.
 const lerpFactor = 0.2; // Adjust this for smoothness of movement. A value closer to 1 will make it less smooth but faster.
 
-const Player: React.FC<{ cameraRef: React.RefObject<PerspectiveCamera> }> = ({
-  cameraRef
+const Player: React.FC<{ cameraRef: React.RefObject<PerspectiveCamera>, onPositionUpdate: (pos: Vector3) => void }> = ({
+  cameraRef,
+  onPositionUpdate
 }) => {
   const playerRef = useRef<Mesh>(null);
   const targetPosition = useRef(new Vector3(0, 0, 0));
@@ -58,6 +59,7 @@ const Player: React.FC<{ cameraRef: React.RefObject<PerspectiveCamera> }> = ({
           playerRef.current.position.z + 5
         );
         cameraRef.current.lookAt(playerRef.current.position);
+      onPositionUpdate(playerRef.current.position);
       }
     }
   });
