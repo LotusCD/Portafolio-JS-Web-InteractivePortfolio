@@ -88,23 +88,14 @@ const Environment: React.FC<{ playerPosition: Vector3 }> = ({ playerPosition }) 
             </mesh>
            
             {[{ x: 2, z: 3 }, { x: -3, z: -4 }].map((pos, idx) => (
-            <>
-                  <Tile 
-                  position={{ x: 2, y: 0.5, z: 3 }}
-                  tileMaterialProps={tileMaterialProps}
-                  lightOrbProps={lightOrbProps}
-                  registerOrb={registerOrb}
-                  idx={0}
-              />
               <Tile 
-                  position={{ x: -3, y: 0.5, z: -4 }}
+                  position={{ x: pos.x, y: 0.5, z: pos.z }}
                   tileMaterialProps={tileMaterialProps}
                   lightOrbProps={lightOrbProps}
                   registerOrb={registerOrb}
-                  idx={1}
+                  idx={idx}
               />
-              </>
-            ))
+              ))
             }
             
 
