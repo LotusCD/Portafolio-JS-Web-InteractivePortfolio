@@ -1,0 +1,10 @@
+.modal-text {
+    cursor: default;
+}
+
+.modal-text:hover {
+    background-color: rgba(0, 0, 255, 0.1); /* Light blue background on hover */
+    cursor: pointer;
+    padding: 0.1em 0.3em; /* Spacing around the text */
+    border-radius: 5px; /* Rounded corners */
+}

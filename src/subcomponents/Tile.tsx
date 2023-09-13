@@ -1,6 +1,4 @@
 import React from "react";
-import { Text } from "@react-three/drei";
-import { MeshBasicMaterial } from 'three';
 
 interface TileProps {
     position: { x: number, y: number, z: number },
@@ -13,23 +11,17 @@ interface TileProps {
 const Tile: React.FC<TileProps> = ({ position, tileMaterialProps, lightOrbProps, registerOrb, idx }) => {
     return (
         <React.Fragment>
-            <mesh position={[position.x, -0.5, position.z]}>
+            <mesh position={[position.x, position.y - 0.5, position.z]}>
                 <boxGeometry args={[1, 0, 1]} />
                 <meshStandardMaterial {...tileMaterialProps} />
             </mesh>
             <mesh 
                 ref={(mesh) => registerOrb(mesh, idx)}
-                position={[position.x, 0.5, position.z]}
+                position={[position.x, position.y + 1, position.z]} // Change from 1 to 0.3
             >
-                <sphereBufferGeometry attach="geometry" args={[0.5, 32, 32]} />
+                <boxBufferGeometry attach="geometry" args={[lightOrbProps.width || 0.5, 0.1, lightOrbProps.height || 0.5]} />
                 <meshBasicMaterial {...lightOrbProps} />
             </mesh>
-            <Text
-                position={[position.x, position.y + 1, position.z]}
-                fontSize={1}
-                color="black"
-            >
-            </Text>
         </React.Fragment>
     );
 };

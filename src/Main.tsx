@@ -32,7 +32,7 @@ const Main: React.FC = () => {
       );
     default:
       return (
-        <IntroScene onStartGame={handleStartGame} onViewPDF={handleViewPDF} />
+        <IntroScene onStartGame={handleStartGame} />
       );
   }
 };

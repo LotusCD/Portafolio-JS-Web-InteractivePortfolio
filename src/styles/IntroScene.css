@@ -1,0 +1,32 @@
+.intro-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 0 10px;
+}
+
+.intro-button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.header-text {
+    font-size: 8vw;
+    font-weight: bold;
+    text-align: center;
+    max-width: 90%;
+    line-height: 1.2;
+}
+
+
+
+@media (min-width: 600px) {
+    .header-text {
+        font-size: 2rem;
+    }
+}
+

@@ -1,37 +1,27 @@
-// IntroScene.tsx
-
 import React from "react";
+import './styles/IntroScene.css'; // Import the CSS
 
 interface Props {
   onStartGame: () => void;
-  onViewPDF: () => void;
 }
 
-const IntroScene: React.FC<Props> = ({ onStartGame, onViewPDF }) => {
-  const containerStyle: React.CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100vh" // take full viewport height
-  };
-
-  const buttonStyle: React.CSSProperties = {
-    margin: "20px", // give space around each button
-    padding: "10px 20px",
-    fontSize: "1.2rem",
-    cursor: "pointer"
-  };
-
+const IntroScene: React.FC<Props> = ({ onStartGame }) => {
   return (
-    <div style={containerStyle}>
-      <h1>Welcome to my Space</h1>
-      <button style={buttonStyle} onClick={onStartGame}>
+    <div className="intro-container">
+      <h1 className="header-text">César Puentes: Software Engineer</h1>
+      <button className="intro-button" onClick={onStartGame}>
         Start Tour
       </button>
-      <button style={buttonStyle} onClick={onViewPDF}>
-        View CV
-      </button>
+      
+      <a 
+        href="https://github.com/LotusCD/CV/raw/main/CV-CesarPuentes-2023.docx" 
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        <button className="intro-button">
+          View CV
+        </button>
+      </a>
     </div>
   );
 };
