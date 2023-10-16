@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Using a simple color scheme */
+:root {
+    --primary-color: #4a90e2; /* Some shade of blue */
+    --secondary-color: #f5f5f5; /* Off-white */
+    --accent-color: #ff4081; /* Some shade of pink/red */
+    --text-color: #333333; /* Dark grey */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+}
+
 .intro-container {
     display: flex;
     flex-direction: column;
@@ -5,28 +21,34 @@
     justify-content: center;
     height: 100vh;
     padding: 0 10px;
-}
-
-.intro-button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
+    text-align: center;
 }
 
 .header-text {
-    font-size: 8vw;
-    font-weight: bold;
-    text-align: center;
-    max-width: 90%;
-    line-height: 1.2;
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
+.intro-button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
+.intro-button:hover {
+    background-color: var(--accent-color);
+}
 
-@media (min-width: 600px) {
+@media (max-width: 768px) {
     .header-text {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 }
-

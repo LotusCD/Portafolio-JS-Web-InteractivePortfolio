@@ -13,10 +13,6 @@ const Main: React.FC = () => {
     setMode("game");
   };
 
-  const handleViewPDF = () => {
-    setMode("pdf");
-  };
-
   // Create new plugin instance
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 

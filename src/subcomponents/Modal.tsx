@@ -38,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({ position, idx }) => {
 
     switch (idx) {
         case 0:
-            textWall = "Welcome to my interactive digital realm! \n I'm César Puentes, a software engineer.\n Please explore this humble space.";
+            textWall = "Welcome to my interactive digital realm! \n I'm César Puentes, a software engineer.";
             break;
         case 1:
             textWall = "Feel free to visit my static website.";
@@ -58,7 +58,7 @@ const Modal: React.FC<ModalProps> = ({ position, idx }) => {
 
     const baseFontSize = 0.3;
     const scaleFactor = size.width > 2500 ? 0.8 : 1;
-    const adjustedFontSize = Math.min(baseFontSize * (size.width / 1000) * scaleFactor, 1);
+    const adjustedFontSize = Math.min(baseFontSize * (size.width / 600) * scaleFactor, 1);
 
     const planeWidth = Math.min(charLimitPerLine * 0.5 * (size.width / 1000), size.width);
     const planeHeight = lines.length * (0.6 + adjustedFontSize * 0.2) + 1;
